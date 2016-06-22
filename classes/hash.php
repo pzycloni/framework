@@ -14,5 +14,13 @@
 		public static function unique() {
 			return self::make(uniqid());
 		}
+
+		public static function like($haystack, $needle) : bool {
+			return (strpos($haystack, $needle) === -1) ? false : true;
+		}
+
+		public static function compare($haystack, $needle) : bool {
+			return ($haystack === $needle) ? true : false;
+		}
 	}
 ?>

@@ -7,7 +7,7 @@
 	// основные настройки конфига
 	$GLOBALS['config'] = array(
 		'mysql' => array(
-			'host' 		=> 'timingo.ru',
+			'host' 		=> 'framework',
 			'db' 		=> 'users_table',
 			'username'	=> 'mysql',
 			'password' 	=> 'mysql'

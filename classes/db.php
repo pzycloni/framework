@@ -80,6 +80,24 @@
 		}
 
 		/*
+			Форматированный вывод полученных данных
+			из базы
+		*/
+		public function printResult($format = null) {
+			$results = $this->result();
+			print '<br>';
+			if ($format == null) {
+				print_r($results);
+			} else {
+				foreach ($results as $result) {
+					foreach ($result as $key => $item) {
+						print "[{$key}] => " . $item . "<br>";
+					}
+				}
+			}
+		}
+
+		/*
 			Получение размера массива резульататов
 		*/
 		public function counter() {
@@ -94,10 +112,14 @@
 		}
 
 		/*
-			Получение первого результата массива
+			Получение первого результата массива или необходимой 
+			ячейки массива
 		*/
-		public function first() {
-			return $this->_results[0];
+		public function first($item = null) {
+			if (!isset($this->_results[0]))
+				return ($item == null) ? $this->_results : $this->_results[$item];
+			else
+				return ($item == null) ? $this->_results[0] : $this->_results[0][$item];
 		}
 
 		/*
@@ -106,7 +128,7 @@
 			Также идет подсчет элементов массива
 			Метод возвращает объект
 		*/
-		public function query($sql) {
+		private function query($sql) {
 			unset($this->_desc_error);
 			$this->_errors = false;
 			$this->_query 	= $sql;
@@ -119,10 +141,10 @@
 					$this->_count 	= count($results);
 					// если размер массива с результатом < 1, преобразуем его
 					// в более удобный массив
-					if (!(count($results) - 1)) {
+					/*if (!(count($results) - 1)) {
 						$this->_results = $this->compressedArray($results);
 						$this->_count 	= count($this->_results);
-					}
+					}*/
 				} else {
 					return true;
 				}
@@ -137,9 +159,15 @@
 		/*
 			Преобразование в массив строки или числа
 		*/
-		private function toArray($param) {
+		private function toArray($param, $bracket = null) {
 			if (!is_array($param)) {
 				$param = array($param);
+			}
+			if ($bracket) {
+				foreach ($param as $key => $value) {
+					$temp[$key] = $bracket . $value . $bracket;
+				}
+				$param = $temp; 
 			}
 			return $param;
 		}
@@ -147,7 +175,7 @@
 		/*
 			Формирование запроса
 		*/
-		public function action($action, $tables = array(), $where = array()) {
+		private function action($action, $tables = array(), $where = array()) {
 			$x 		= 1;
 			$where 	= $this->toArray($where);
 			$tables	= $this->toArray($tables);
@@ -167,8 +195,12 @@
 		/*
 			Select запрос (получение данных)
 		*/
-		public function get($tables = array(), $fields = array(), $where = null) {
-			$fields = $this->toArray($fields);
+		public function get($tables = array(), $fields = '*', $where = null) {
+			if ($fields === '*' || $fields == '1') {
+				$fields = $this->toArray($fields);
+			} else {
+				$fields = $this->toArray($fields, '`');
+			}
 			// если $where пусто то присваиваем 1 во избежания ошибок
 			$where = (!$where) ? '1' : $where;
 			return $this->action("SELECT " . implode(', ', $fields) . "", $tables, $where);

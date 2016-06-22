@@ -18,9 +18,9 @@
 					Config::get("table/user/salt"),
 					Config::get("table/user/email")
 				),
-				Config::get("table/user/username") . " = " . Session::get(Config::get("session/session_name"))
+				Config::get("table/user/username") . " = '" . Session::get(Config::get("session/session_name")) . "'"
 			);
-			print_r($this->_db->result());
+			$this->_db->printResult(true);
 			print_r($this->_db->getLastQuery());
 		}
 	}
