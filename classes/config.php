@@ -1,4 +1,4 @@
-<?
+<?php
 	/*ищем нужную информацию в глобальном массиве данных $GLOBALS*/
 	class Config {
 		public static function get($path = null) {

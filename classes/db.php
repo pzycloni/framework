@@ -1,4 +1,4 @@
-<?
+<?php
 	/*
 		Запросы к бд, 
 		их формирование, 
@@ -60,9 +60,10 @@
 			Распечатка ошибок
 		*/
 		public function printErrors() {
-			foreach ($this->getErrors() as $error) {
-				print $error . '<br>';
-			}
+			if (is_array($this->getError))
+				foreach ($this->getErrors() as $error) {
+					print $error . '<br>';
+				}
 		}
 
 		/*
@@ -241,6 +242,9 @@
 			Вставка новой записи в таблицу
 		*/
 		public function insert($table, $fields) {
+			if (is_null($table) || is_null($fields))
+				return false;
+
 			$table 	= $this->toArray($table);
 			$fields = $this->toArray($fields);
 
@@ -278,25 +282,18 @@
 			формат поля fields: 
 					array('имя_поля' => 'опции', ...)
 		*/
-		public function createTable($name, $fields, $primary_key = null) {
-			$x = 1;
-			$fields = $this->toArray($fields);
-			$sql = "CREATE TABLE IF NOT EXISTS `{$name}` (";
-			if (!is_array($name)) {
-				foreach ($fields as $key => $option) {
-					$sql .= "`{$key}` {$option}";
-					if ($x < count($fields)){
-						$sql .= ', ';
-					}
-					$x++;
-				}
-				$sql .= ($primary_key) ? $this->setPrimaryKey($primary_key) : '';
-				$sql .= ")";
-			}
-			if (!$this->query($sql)->_error) {
-				return $this;
+		public function createTable($name, $column = array(), $constraint = array()) {
+			if (is_array($column)) {
+				$keys = array_keys($column);
+				$
+				$sql = "CREATE TABLE {$name} " . '(';
+				$sql .= implode(', ', $keys);
+				$sql .= ')';
+			} else {
+				return false;
 			}
 			print $sql;
+			//$this->query($sql);
 		}
 
 		/*

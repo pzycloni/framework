@@ -1,4 +1,4 @@
-<?
+<?php
 	class Session {
 		public static function exists($name = null) {
 			return (isset($_SESSION[$name])) ? true : false;

@@ -7,7 +7,7 @@
 	// основные настройки конфига
 	$GLOBALS['config'] = array(
 		'mysql' => array(
-			'host' 		=> 'framework',
+			'host' 		=> 'dropbox',
 			'db' 		=> 'users_table',
 			'username'	=> 'mysql',
 			'password' 	=> 'mysql'
@@ -51,6 +51,5 @@
 	
 	// подгружаем все классы
 	spl_autoload_register(function($class){
-		require_once "classes/" . $class . '.php';
+		require_once __DIR__ . "/../classes/" . $class . '.php';
 	});
-?>
