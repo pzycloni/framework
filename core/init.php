@@ -5,51 +5,8 @@
 	session_start();
 
 	// основные настройки конфига
-	$GLOBALS['config'] = array(
-		'mysql' => array(
-			'host' 		=> 'dropbox',
-			'db' 		=> 'users_table',
-			'username'	=> 'mysql',
-			'password' 	=> 'mysql'
-		),
-		'table' => array(
-			'user' => array(
-				'uid' 		=> 'id',
-				'username' 	=> 'username',
-				'last' 		=> 'lastname',
-				'first' 	=> 'firstname',
-				'pass'		=> 'password',
-				'email' 	=> 'email',
-				'salt' 		=> 'salt',
-				'joined'	=> 'joined',
-				'group'		=> 'group'
-			),
-			'information' => array(
-				'uid' 	=> 'id',
-				'icon' 	=> 'icon',
-				'data' 	=> 'session'
-			),
-			'user_messages' => array(
-				'mid' 		=> 'id',
-				'uid' 		=> 'id_user',
-				'title' 	=> 'header',
-				'message' 	=> 'message',
-				'time' 		=> 'time'
-			),
-		),
-		'session' => array(
-			'session_name' 	=> 'uname',
-			'session_id'	=> 'id'
-		),
-		'remember' => array(
-			'cookie_name' => 'hash',
-			'cookie_life' => 604800
-		),
-		'post' => array()
-	);
+	$GLOBALS['config'] = require_once "settings.php";
 
-	
-	// подгружаем все классы
-	spl_autoload_register(function($class){
-		require_once __DIR__ . "/../classes/" . $class . '.php';
-	});
+	require_once "constants.php";
+
+	require_once "classes/autoload.php";
