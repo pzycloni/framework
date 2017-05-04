@@ -13,6 +13,9 @@
 			return $_SERVER['REQUEST_URI'];
 		}
 
+		/**
+			* Проверка на валидность запроса
+		*/
 		public static function isBad() {
 			return isset(self::$url[0], self::$url[1]);
 		}
@@ -149,7 +152,7 @@
 			* @return array
 		*/
 		public static function get($name = null) {
-			return is_null($name) ? $_GET : Protect::full($_GET[$name]);
+			return is_null($name) ? $_GET : Protect::complex($_GET[$name]);
 		}
 
 		/**
@@ -162,7 +165,7 @@
 			* @return array
 		*/
 		public static function post($name = null) {
-			return is_null($name) ? $_POST : Protect::full($_POST[$name]);
+			return is_null($name) ? $_POST : Protect::complex($_POST[$name]);
 		}
 
 		/**

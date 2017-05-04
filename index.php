@@ -23,3 +23,5 @@
 
 	$responce = new Response();
 
+	Route::run();
+

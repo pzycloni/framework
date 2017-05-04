@@ -7,7 +7,9 @@
 		'exceptions' => [
 			'defaultexception',
 			'sqlexception',
-			'invalidrequestexception'
+			'invalidrequestexception',
+			'invalidcontrollerexception',
+			'invalidmethodexception'
 		],
 		'sql' => [
 			'query',
@@ -34,7 +36,8 @@
 		],
 		'http' => [
 			'request',
-			'response'
+			'response',
+			'route'
 		]
 	];
 
