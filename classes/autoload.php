@@ -6,7 +6,8 @@
 	$files = [
 		'exceptions' => [
 			'defaultexception',
-			'sqlexception'
+			'sqlexception',
+			'invalidrequestexception'
 		],
 		'sql' => [
 			'query',

@@ -2,11 +2,7 @@
 
 	class Request {
 
-		private $arguments;
-
-		private $method;
-
-		private $controller;
+		private static $url;
 
 		/**
 			* Получение  URI
@@ -17,16 +13,46 @@
 			return $_SERVER['REQUEST_URI'];
 		}
 
+		public static function isBad() {
+			return isset(self::$url[0], self::$url[1]);
+		}
 
-		public static function parseUrl() {
+		/**
+			* Делим на части запрос
+		*/
+		public static function parse() {
+			return self::$url = explode('/', filter_var(rtrim(self::any(URL), '/'), FILTER_SANITIZE_URL));
+		}
 
-			$url = explode('/', filter_var(rtrim(self::any(URL), '/'), FILTER_SANITIZE_URL));
+		/**
+			* Получение контроллера из запроса
+		*/
+		public static function controller() {
+			if (self::isBad())
+				return false;
 
-			$this->controller = $url[0];
-			$this->method = $url[1];
-			$this->arguments = $url[2];
+			return self::$url[0];
+		}
 
-			unset($url);
+		/*
+			* Получение метода из запроса
+		*/
+		public static function func() {
+			if (self::isBad())
+				return false;
+
+			return self::$url[1];
+		}
+
+		/*
+			* Получение аргументов из запроса
+		*/
+		public static function arguments() {
+			if (!isset(self::$url[2])) {
+				return [];
+			}
+
+			return is_array(self::$url[2]) ? self::$url[2] : [self::$url[2]];
 		}
 
 		/**
