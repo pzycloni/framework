@@ -175,6 +175,16 @@
 		}
 
 		/**
+			* Преобразование в json
+			*
+			* @return json
+		*/
+		public function JSON() {
+			return json_encode($this->content->get());
+		}
+
+
+		/**
 			* Получение версии http протокола 
 			*
 			* @return string
@@ -209,8 +219,10 @@
 				]
 			);
 
-			return array_merge($this->content->get(), $this->headers->get())
+			$content = array_merge($this->content->get(), $this->headers->get());
+			$this->setContent($content);
 
+			return $this;
 		}
 
 		/**

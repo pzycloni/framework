@@ -50,7 +50,7 @@
 
 			$response->setStatusCode($codeStatus);
 
-			return $response->build();
+			return $response->build()->JSON();
 		}
 
 		private static function execute($controller, $method, $args) {
