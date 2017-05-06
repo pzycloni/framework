@@ -10,3 +10,5 @@
 	require_once "constants.php";
 
 	require_once "classes/autoload.php";
+
+	require_once "controllers/autoload.php";

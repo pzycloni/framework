@@ -8,14 +8,18 @@
 
 			Request::parse();	
 
-			if (Request::controller() === false || Request::func() === false) {
+			if (Request::isBad()) {
 				self::$errors[] = new InvalidRequestException('Bad Request!');
+				// ошибка
+				return self::error(400, 'Bad Request! Invalid one of parameters!');
 			}
 
 			try {
 				require_once CONTROLLERS . Request::controller() . '.php';
 			} catch (InvalidControllerException $e) {
 				self::$errors[] = new InvalidControllerException('Controller ' . Request::controller() . ' not found!');
+				// ошибка
+				return self::error(400, 'Bad Request! Invalid one of parameters!');
 			}
 
 			$controller = Request::controller();
@@ -27,6 +31,8 @@
 					' from controller' . Request::controller() . 
 					' not found!'
 				);
+				// ошибка
+				return self::error(400, 'Bad Request! Invalid one of parameters!');
 			}
 
 			$method = Request::func();
@@ -37,11 +43,19 @@
 
 		}
 
+		private static function error($codeStatus, $reason) {
+			$response = new Response();
+
+			$response->setContent(['error' => $reason]);
+
+			$response->setStatusCode($codeStatus);
+
+			return $response->build();
+		}
+
 		private static function execute($controller, $method, $args) {
 			
 			$result = call_user_func_array([$controller, $method], $args);
-
-			
 
 		}
 	}

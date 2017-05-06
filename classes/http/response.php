@@ -107,7 +107,16 @@
 			* @param array $content
 		*/
 		public function setContent($content) {
-			$this->content = $content;
+			$this->content->set($content);
+		}
+
+		/**
+			* Установка нового заголовка
+			* 
+			* @param array $header
+		*/
+		public function setHeaders($headers) {
+			$this->headers->set($headers);
 		}
 
 		/**
@@ -157,12 +166,51 @@
 		}
 
 		/**
+			* Получение расшифровка статуса
+			*
+			* @return string
+		*/
+		public function getStatusText() {
+			return $this->statusText;
+		}
+
+		/**
 			* Получение версии http протокола 
 			*
 			* @return string
 		*/
 		public function getProtocolVersion() {
 			return $this->version;
+		}
+
+		/**
+			* Собираем запрос
+			*
+			* @param array $data
+			*
+			* @return $this
+
+		*/
+		public function build($data = []) {
+
+			$http_version = $this->getProtocolVersion();
+
+			$code = $this->getStatusCode();
+			$message = $this->getStatusText();
+
+			$this->setHeaders(
+				[
+					'http_version' 	=> $http_version,
+					'http_status' 	=> 
+					[
+						'code' 		=> $code,
+						'message' 	=> $message
+					]
+				]
+			);
+
+			return array_merge($this->content->get(), $this->headers->get())
+
 		}
 
 		/**

@@ -17,7 +17,7 @@
 			* Проверка на валидность запроса
 		*/
 		public static function isBad() {
-			return isset(self::$url[0], self::$url[1]);
+			return !isset(self::$url[0], self::$url[1]);
 		}
 
 		/**
