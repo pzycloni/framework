@@ -2,3 +2,23 @@ AddDefaultCharset Off
 <IfModule dir_module>
     DirectoryIndex index.php
 </IfModule>
+
+# Turn rewrite engine on
+Options +FollowSymlinks
+RewriteEngine on
+
+# map neat URL to internal URL
+RewriteRule ^([a-zA-Z0-9]+)/(clients/show)/$   				index.php?token=$1&view=1440&url=$2 [nc,qsa]
+RewriteRule ^([a-zA-Z0-9]+)/(clients/show/([0-9]+))/*$   	index.php?token=$1&view=$3&url=$2 [nc,qsa]
+RewriteRule ^([a-zA-Z0-9]+)/(offers/create)/$   			index.php?token=$1&url=$2 [nc,qsa]
+RewriteRule ^([a-zA-Z0-9]+)/(offers/create/([0-9]+))/*$   	index.php?token=$1&payment=$3&url=$2 [nc,qsa]
+RewriteRule ^([a-zA-Z0-9]+)/(agreements/show)/$   			index.php?token=$1&view=20&url=$2 [nc,qsa]
+RewriteRule ^([a-zA-Z0-9]+)/(agreements/show/([0-9]+))/*$   index.php?token=$1&view=$3&url=$2 [nc,qsa]
+
+
+# errors
+RewriteRule ^classes/*.+$    		index.php?error=404 [nc,qsa]
+RewriteRule ^core/*.+$    			index.php?error=404 [nc,qsa]
+RewriteRule ^controllers/*.+$    	index.php?error=404 [nc,qsa]
+RewriteRule ^models/*.+$    		index.php?error=404 [nc,qsa]
+RewriteRule ^views/*.+$    			index.php?error=404 [nc,qsa]

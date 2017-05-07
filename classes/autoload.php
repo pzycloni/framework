@@ -31,7 +31,6 @@
 			'protect',
 			'redirect',
 			'session',
-			'user',
 			'validate'
 		],
 		'http' => [

@@ -3,7 +3,7 @@
 
 		public static function complex($value) {
 
-			$value = self::sql($value);
+			//$value = self::sql($value);
 			$value = self::xss($value);
 
 			return $value;

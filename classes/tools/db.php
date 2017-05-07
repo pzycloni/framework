@@ -59,7 +59,7 @@
 			Проверка, выполнен ли запрос к бд
 		*/
 		public function executed() {
-			return !$this->errors->exist();
+			return $this->errors->is_clean();
 		}
 
 		/*
@@ -67,6 +67,13 @@
 		*/
 		public function errors() {
 			return $this->errors->get();
+		}
+
+		/*
+			Получаем данные
+		*/
+		public function results() {
+			return $this->result;
 		}
 
 		/*

@@ -1,7 +1,8 @@
 <?
 	require_once __DIR__ . "/core/init.php";
 
-	$tables = ['organizations'];
+	
+	/*$tables = ['organizations'];
 	$fields = [
 		Config::get('table/organizations/name'),
 		Config::get('table/organizations/pass')
@@ -19,9 +20,13 @@
 	if ($result) {
 		print 'ok';
 	}
-	else print 'bad';
+	else print 'bad';*/
 
-	$responce = new Response();
+	print_r(Route::run());
 
-	Route::run();
+	print_r(Request::get());
+
+	if (Request::issetGet(ERROR)) {
+		print Request::get(ERROR);
+	}
 

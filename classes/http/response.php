@@ -180,7 +180,7 @@
 			* @return json
 		*/
 		public function JSON() {
-			return json_encode($this->content->get());
+			return json_encode($this->content->get(), JSON_UNESCAPED_UNICODE);
 		}
 
 
@@ -215,7 +215,9 @@
 					[
 						'code' 		=> $code,
 						'message' 	=> $message
-					]
+					],
+					'date' 			=> date('d F Y'),
+					'time'			=> date('H:i:s')
 				]
 			);
 

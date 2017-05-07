@@ -39,7 +39,7 @@
 
 			$args = Request::arguments();
 
-			self::execute($controller, $method, $args);
+			return self::execute($controller, $method, $args);
 
 		}
 
@@ -54,8 +54,14 @@
 		}
 
 		private static function execute($controller, $method, $args) {
+			$response = new Response();
 			
 			$result = call_user_func_array([$controller, $method], $args);
 
+			$response->setContent($result);
+			
+			$response->setStatusCode(200);
+
+			return $response->build()->JSON();
 		}
 	}

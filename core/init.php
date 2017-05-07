@@ -9,6 +9,9 @@
 
 	require_once "constants.php";
 
-	require_once "classes/autoload.php";
+	require_once CLASSES . 'autoload.php';
 
-	require_once "controllers/autoload.php";
+	require_once CONTROLLERS . 'defaultcontroller.php';
+	require_once CONTROLLERS . 'agreements.php';
+	require_once CONTROLLERS . 'clients.php';
+	require_once CONTROLLERS . 'offers.php';
