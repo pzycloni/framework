@@ -6,41 +6,11 @@
 			Инициализация необходиммых переменных
 		*/
 		public function __construct() {
-
 			$this->db = DB::connect();
 			// создаем контейнер результата
 			$this->result = new Data();
 			// устанавливаем токен доступа
 			$this->token = Request::get(TOKEN);
-			// проверка доступа
-			$this->access = $this->checkAvailable();
-		}
-
-		/*
-			Получение переменной доступа
-		*/
-		public function getAvailable() {
-			return $this->access;
-		}
-
-		/*
-			Проверка доступа к методам модели по токену
-		*/
-		public function checkAvailable() {
-
-			$table = [TABLE_ORG];
-			$field = [Config::get(ORGANIZATIONS . "token")];
-			$where = Config::get(ORGANIZATIONS . "token") . "='" . Request::get(TOKEN) . "'";
-
-			$query = new Select($table, $field, $where);
-
-			$this->result->set($this->db->get($query));
-
-			if ($this->db->results()->is_clean() || !$this->db->executed()) {
-				return false;
-			}
-
-			return true;
 		}
 
 		/*
@@ -95,18 +65,20 @@
 			// поле заказа
 			$accepted = Config::get(CLIENTS . "accepted");
 
-			$this->db->get(
-				TABLE_CLIENTS,
-				[
+			$table = [TABLE_CLIENTS];
+			$fields = [
 					Config::get(CLIENTS . "from"),
 					Config::get(CLIENTS . "to"),
 					Config::get(CLIENTS . "time"),
 					Config::get(CLIENTS . "pay")
-				],
-				"{$accepted}='{$this->token}' LIMIT {$count}"
-			);
+			];
+			$where = "{$accepted}='{$this->token}' LIMIT {$count}";
 
-			return $this->result = $this->db->result->get();
+			$query = new Select($table, $fields, $where);
+
+			$this->db->get($query);
+
+			return $this->result = $this->db->results()->get();
 		}
 
 		/*
@@ -115,7 +87,7 @@
 		public function setNewOffer($uid, $payment) {
 
 			// TODO: написать функцию отправки сообщения с предложением пользователю
-
+			
 		}
 
 	}

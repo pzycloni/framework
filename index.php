@@ -24,7 +24,6 @@
 
 	print_r(Route::run());
 
-	print_r(Request::get());
 
 	if (Request::issetGet(ERROR)) {
 		print Request::get(ERROR);

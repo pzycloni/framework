@@ -3,13 +3,13 @@
 	class Agreements extends DefaultController {
 
 		public function show($count = null) {
-			$user = $this->model('Transaction');
+			$transation = $this->model('Transaction');
 			
-			if ($user->getAvailable()) {
-				return $user->getListAgreements($count);
+			if ($this->is_available()) {
+				return $transation->getListAgreements($count);
 			}
 
-			return array();
+			return false;
 		}
 
 	}

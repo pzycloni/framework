@@ -4,13 +4,13 @@
 
 		public function show($args = null) {
 
-			$user = $this->model('Transaction');
+			$transaction = $this->model('Transaction');
 			
-			if ($user->getAvailable()) {
-				return $user->getListClients($args);
+			if ($this->is_available()) {
+				return $transaction->getListClients($args);
 			}
 
-			return array();
+			return false;
 		}
 
 	}

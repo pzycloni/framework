@@ -58,9 +58,23 @@
 			
 			$result = call_user_func_array([$controller, $method], $args);
 
-			$response->setContent($result);
-			
-			$response->setStatusCode(200);
+			if (!is_bool($result)) {
+				foreach ($result as $row)
+					$content['result'][] = $row;
+				
+				$response->setContent($content);
+
+				$response->setStatusCode(200);
+			}
+			else {
+				$response->setContent(
+					[
+						'error' => 'Invalid token ' . Request::get(TOKEN)
+					]
+				);
+
+				$response->setStatusCode(406);
+			}
 
 			return $response->build()->JSON();
 		}

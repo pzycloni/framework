@@ -4,13 +4,13 @@
 
 		public function create($id, $payment) {
 
-			$user = $this->model('Transaction');
+			$transation = $this->model('Transaction');
 			
-			if ($user->getAvailable()) {
-				return $user->setNewOffer($id, $payment);
+			if ($this->is_available()) {
+				return $transation->setNewOffer($id, $payment);
 			}
 
-			return array();
+			return false;
 		}
 
 	}

@@ -221,7 +221,7 @@
 				]
 			);
 
-			$content = array_merge($this->content->get(), $this->headers->get());
+			$content = array_merge($this->headers->get(), $this->content->get());
 			$this->setContent($content);
 
 			return $this;
