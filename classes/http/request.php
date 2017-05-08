@@ -51,11 +51,19 @@
 			* Получение аргументов из запроса
 		*/
 		public static function arguments() {
-			if (!isset(self::$url[2])) {
+
+			$args = array_slice(self::$url, 2);
+
+			if (count($args) === 0) {
+				
+				if (self::issetGet(TIMEZONE)) {
+					return [self::get(TIMEZONE)];
+				}
+
 				return [];
 			}
 
-			return is_array(self::$url[2]) ? self::$url[2] : [self::$url[2]];
+			return $args;
 		}
 
 		/**

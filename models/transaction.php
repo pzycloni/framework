@@ -87,7 +87,7 @@
 		public function setNewOffer($uid, $payment) {
 
 			// TODO: написать функцию отправки сообщения с предложением пользователю
-			
+			print $uid . ' ' . $payment;
 		}
 
 	}

@@ -55,6 +55,8 @@
 
 		private static function execute($controller, $method, $args) {
 			$response = new Response();
+
+			print_r($args);
 			
 			$result = call_user_func_array([$controller, $method], $args);
 
