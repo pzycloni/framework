@@ -55,10 +55,10 @@
 
 		private static function execute($controller, $method, $args) {
 			$response = new Response();
-
-			print_r($args);
 			
 			$result = call_user_func_array([$controller, $method], $args);
+
+			$content = [];
 
 			if (!is_bool($result)) {
 				foreach ($result as $row)
@@ -69,6 +69,7 @@
 				$response->setStatusCode(200);
 			}
 			else {
+				print "else";
 				$response->setContent(
 					[
 						'error' => 'Invalid token ' . Request::get(TOKEN)

@@ -4,10 +4,10 @@
 
 		public function create($id, $payment) {
 
-			$transation = $this->model('Transaction');
+			$transation = $this->model('Channel');
 			
 			if ($this->is_available()) {
-				return $transation->setNewOffer($id, $payment);
+				return $transation->create($id, $payment);
 			}
 
 			return false;
