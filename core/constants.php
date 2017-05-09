@@ -20,6 +20,8 @@
 	
 	define('TABLE_CLIENTS', 	'clients');
 	define('TABLE_ORG', 		'organizations');
+	define('TABLE_TELEGRAM', 	'access');
 	
 	define('CLIENTS', 			'table/' . TABLE_CLIENTS . '/');
 	define('ORGANIZATIONS', 	'table/' . TABLE_ORG . '/');
+	define('TELEGRAM', 			'table/' . TABLE_TELEGRAM . '/');

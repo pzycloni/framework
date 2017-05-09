@@ -31,6 +31,13 @@
 		protected $token;
 
 		/**
+			* Содержит токен доступа к API Telegram 
+			*
+			* @param string $telegram
+		*/
+		protected $telegram;
+
+		/**
 			* Конструктор
 		*/
 		public function __construct() {
@@ -76,6 +83,25 @@
 			}
 
 			return true;
+		}
+
+		/**
+			* Получаем токен Telegram из бд
+			*
+			* @return string
+		*/
+		public function getTokenTelegram() {
+
+			$token = Config::get(TELEGRAM . TOKEN);
+
+			$query = new Select(
+				[TABLE_TELEGRAM],
+				[$token]
+			);
+
+			$this->db->get($query);
+
+			return $this->db->results()->first($token);
 		}
 
 	}

@@ -22,6 +22,10 @@
 				'time' 		=> 'time',
 				'accepted' 	=> 'accepted',
 				'pay'		=> 'payment',
+				'chat'		=> 'chat'
+			],
+			'access'	=> [
+				'token'		=> 'token'
 			]
 		]
 	];

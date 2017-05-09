@@ -7,6 +7,11 @@
 			$transaction = $this->model('Transaction');
 			
 			if ($this->is_available()) {
+
+				$token = 'bot' . $this->getTokenTelegram();
+
+				$transaction->setTokenTelegram($token);
+
 				return $transaction->getListClients($args);
 			}
 

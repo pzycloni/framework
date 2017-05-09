@@ -2,8 +2,16 @@
 
 	class Transaction {
 
-		/*
-			Инициализация необходиммых переменных
+		private $db;
+
+		private $result;
+
+		private $token;
+
+		private $telegram;
+
+		/**
+			* Конструктор
 		*/
 		public function __construct() {
 			$this->db = DB::connect();
@@ -13,10 +21,14 @@
 			$this->token = Request::get(TOKEN);
 		}
 
-		/*
-			Получаем список клиентов,
-			чьи заказы еще не приняты, 
-			в нужном промежутке
+		/**
+			* Получаем список клиентов,
+			* чьи заказы еще не приняты, 
+			* в нужном промежутке
+			*
+			* @param int $timezone
+			*
+			* @return array
 		*/
 		public function getListClients($timezone) {
 			// поле заказа
@@ -58,8 +70,12 @@
 			return $this->result = $orderlist;
 		}
 
-		/*
-			Получаем список согласившихся клиентов 
+		/**
+			* Получаем список согласившихся клиентов 
+			*
+			* @param int $count
+			*
+			* @return array
 		*/
 		public function getListAgreements($count) {
 			// поле заказа
@@ -79,6 +95,24 @@
 			$this->db->get($query);
 
 			return $this->result = $this->db->results()->get();
+		}
+
+		/**
+			* Устанавливаем токен Telegram
+			*
+			* @return string
+		*/
+		public function setTokenTelegram($token) {
+			$this->telegram = $token;
+		}
+
+		/**
+			* Регистрируем новый заказ клиента
+			*
+			* @param
+		*/
+		public function setNewOrder() {
+			
 		}
 
 	}
