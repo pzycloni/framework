@@ -2,12 +2,24 @@
 
 	class Transaction {
 
+		/**
+			* @param DB
+		*/
 		private $db;
 
+		/**
+			* @param Dada
+		*/
 		private $result;
 
+		/**
+			* @param string
+		*/
 		private $token;
 
+		/**
+			* @param string
+		*/
 		private $telegram;
 
 		/**

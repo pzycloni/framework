@@ -2,14 +2,29 @@
 
 	class Channel {
 
+		/**
+			* @param DB
+		*/
 		private $db;
 
+		/**
+			* @param Dada
+		*/
 		private $result;
 
+		/**
+			* @param string
+		*/
 		private $token;
 
+		/**
+			* @param string
+		*/
 		private $telegram;
 
+		/**
+			* Конструктор
+		*/
 		public function __construct() {
 			$this->db = DB::connect();
 			// создаем контейнер результата
@@ -32,7 +47,14 @@
 			$url = 'https://api.telegram.org/' . $this->telegram . '/sendMessage?' 
 					. http_build_query($parameters);
 
-			file_get_contents($url);
+			try {
+				file_get_contents($url);
+			} 
+			catch (InvalidMessageException $e){
+				return ['error' => 'faild to send message!'];
+			}
+
+			return [];
 		}
 
 		/**
@@ -76,8 +98,6 @@
 			$id = $organization[Config::get(ORGANIZATIONS . 'id')];
 			$name = $organization[Config::get(ORGANIZATIONS . 'name')];
 
-			$token = 
-
 			$chatId = 111989844;
 			$message = "/{$id} Такси {$name} предлагает Вам поездку за {$payment} руб.";
 
@@ -86,9 +106,7 @@
 				'text' => $message
 			];
 
-			$this->sendMessage($token, $parameters);
-
-			return [];
+			return $this->sendMessage($parameters);
 		}
 
 	}

@@ -9,7 +9,8 @@
 			'sqlexception',
 			'invalidrequestexception',
 			'invalidcontrollerexception',
-			'invalidmethodexception'
+			'invalidmethodexception',
+			'invalidmessageexception'
 		],
 		'sql' => [
 			'query',

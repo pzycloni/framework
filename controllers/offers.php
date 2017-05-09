@@ -4,10 +4,15 @@
 
 		public function create($id, $payment) {
 
-			$transation = $this->model('Channel');
+			$transaction = $this->model('Channel');
 			
 			if ($this->is_available()) {
-				return $transation->create($id, $payment);
+
+				$token = 'bot' . $this->getTokenTelegram();
+
+				$transaction->setTokenTelegram($token);
+
+				return $transaction->create($id, $payment);
 			}
 
 			return false;
