@@ -15,3 +15,5 @@
 	require_once CONTROLLERS . 'agreements.php';
 	require_once CONTROLLERS . 'clients.php';
 	require_once CONTROLLERS . 'offers.php';
+
+	require_once VIEWS . 'header.php';

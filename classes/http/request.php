@@ -96,6 +96,21 @@
 		}
 
 		/**
+			* Проверка на json запрос
+			*	
+			* @return bool
+		*/
+		public static function isJSON() {
+			$contentType = self::contentType();
+
+			if (preg_match('/(json)/', $contentType) || preg_match('/(urlencoded)/', $contentType)){
+				return true;
+			}
+
+			return false;
+		}
+
+		/**
 			* Проверка на GET запрос
 			*
 			* @return bool

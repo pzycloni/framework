@@ -1,0 +1,16 @@
+.jumbotron h1 {
+	margin-left: 155px;
+}
+
+.jumbotron p {
+	margin-left: 155px;
+	margin-right: 50px;
+}
+
+h2.docs {
+	margin-bottom: 50px;
+}
+
+.server-message {
+	margin-top: 35px;
+}

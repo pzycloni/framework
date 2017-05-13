@@ -15,6 +15,8 @@ RewriteRule ^([a-zA-Z0-9]+)/(offers/create/([0-9]+)/([0-9]+))/*$   	index.php?to
 RewriteRule ^([a-zA-Z0-9]+)/(agreements/show)/$   			index.php?token=$1&view=20&url=$2 [nc,qsa]
 RewriteRule ^([a-zA-Z0-9]+)/(agreements/show/([0-9]+))/*$   index.php?token=$1&view=$3&url=$2 [nc,qsa]
 
+#docs
+RewriteRule ^docs/*$				index.php?docs=show [nc,qsa]
 
 # errors
 RewriteRule ^classes/*.+$    		index.php?error=404 [nc,qsa]
