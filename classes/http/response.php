@@ -81,7 +81,7 @@
 		*/
 		public function __construct() {
 
-			$this->content = new Content();
+			$this->content = new Data();
 			$this->headers = new Header();
 
 			$this->setStatusCode(200);
