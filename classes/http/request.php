@@ -28,45 +28,6 @@
 		}
 
 		/**
-			* Получение контроллера из запроса
-		*/
-		public static function controller() {
-			if (self::isBad())
-				return false;
-
-			return self::$url[0];
-		}
-
-		/*
-			* Получение метода из запроса
-		*/
-		public static function func() {
-			if (self::isBad())
-				return false;
-
-			return self::$url[1];
-		}
-
-		/*
-			* Получение аргументов из запроса
-		*/
-		public static function arguments() {
-
-			$args = array_slice(self::$url, 2);
-
-			if (count($args) === 0) {
-				
-				if (self::issetGet(TIMEZONE)) {
-					return [self::get(TIMEZONE)];
-				}
-
-				return [];
-			}
-
-			return $args;
-		}
-
-		/**
 			* Получаем тип запроса
 			*
 			* @return string
