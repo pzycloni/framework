@@ -1,57 +1,21 @@
 <?php
-	
-	/*
-		Все Exceptions
+
+	/**
+		* Загрузчик всех классов
 	*/
-	$files = [
-		'exceptions' => [
-			'defaultexception',
-			'sqlexception',
-			'invalidrequestexception',
-			'invalidcontrollerexception',
-			'invalidmethodexception',
-			'invalidmessageexception'
-		],
-		'sql' => [
-			'query',
-			'delete',
-			'select',
-			'insert',
-			'update'
-		],
-		'tools' => [
-			'config',
-			'data',
-			'error',
-			'content',
-			'header',
-			'cookie',
-			'db',
-			'hash',
-			'input',
-			'protect',
-			'redirect',
-			'session',
-			'validate'
-		],
-		'http' => [
-			'request',
-			'response',
-			'route'
-		]
-	];
+	function autoloader() {
 
-	function autoloader($dir, $classes) {
-		
-		foreach ($classes as $class) {
-			try {
-				require_once CLASSES . $dir . '/' . $class . '.php';
-			} catch (Exception $e) {
+		// родительский класс
+		include_once(__DIR__ . "/sql/query.php");
 
+		foreach (array_diff(scandir(__DIR__), ['.', '..', 'autoload.php']) as $dir) {
+			
+			foreach (array_diff(scandir(__DIR__ . "/{$dir}"), ['.', '..']) as $file) {
+
+				include_once(__DIR__ . "/{$dir}/{$file}");
 			}
 		}
 	}
 
-	foreach ($files as $dir => $file) {
-		autoloader($dir, $file);
-	}
+
+	autoloader();

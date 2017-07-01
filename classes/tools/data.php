@@ -33,6 +33,10 @@
 			if ($column != null) {
 				$data = array();
 
+				if (!$this->size) {
+					return array();
+				}
+
 				foreach ($this->data as $row) {
 					foreach ($row as $field => $value) {
 						if ($field == $column) {

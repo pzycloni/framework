@@ -20,11 +20,11 @@
 			if (!self::$_instance) {
 				try {
 					mysql_connect(
-						Config::get(SERVER . "host"), 
-						Config::get(SERVER . "username"), 
-						Config::get(SERVER . "password")
+						Config::get(SERVER_SQL . "host"), 
+						Config::get(SERVER_SQL . "username"), 
+						Config::get(SERVER_SQL . "password")
 					);
-					mysql_select_db(Config::get(SERVER . "db"));
+					mysql_select_db(Config::get(SERVER_SQL . "db"));
 					mysql_set_charset("SET NAMES {$names}");
 				}
 				catch (Exception $exception) {
