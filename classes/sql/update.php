@@ -15,6 +15,10 @@
 			$this->build();
 		}
 
+		private function equal($left_stmt, $right_stmt) {
+			return "`{$left_stmt}`='{$right_stmt}'";
+		}
+
 		/**
 			*Сборка запроса
 		*/
@@ -24,20 +28,11 @@
 
 			$table = $tables[0];
 
-			$x = 1;
-			$set = null;
-
-			foreach ($this->fields as $name => $value){
-				$set .= "`{$name}` = '{$value}'";
-				if ($x < count($this->fields)){
-					$set .= ', ';
-				}
-				$x++;
-			}
+			$equals = array_map(array($this, 'equal'), $this->fields, $this->values);
 
 			$action = 'UPDATE ' . $table . ' ';
 
-			$set = 'SET ' . $set . ' ';
+			$set = 'SET ' . implode(', ', $equals);
 
 			$where = 'WHERE ' . $this->where;
 
